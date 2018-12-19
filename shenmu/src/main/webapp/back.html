@@ -150,9 +150,9 @@
 </span>
         </li>
 
-        <li style="margin-top:20px;" class="Leftnav">
-            <img src="back/imgs/hot.png">
-            <p>
+        <li style="margin-top:20px;" class="Leftnav" onclick="helihuagetMsg()">
+            <img src="back/imgs/hot.png" onclick="helihuagetMsg()">
+            <p onclick="helihuagetMsg()">
                 合理化建议
             </p>
             <span>
@@ -218,7 +218,7 @@
 6S &amp; TPM
 </span>
 
-        <span>
+        <span onclick="helihuagetMsg()">
 合理化建议
 </span>
 
@@ -1310,11 +1310,12 @@
                 <option value="安全例会">安全例会</option>
                 <option value="质量互控">质量互控</option>
                 <option value="质量分析">质量分析</option>
+                <option value="质量预控">质量预控</option>
                 <option value="电子台账">电子台账</option>
 
                 <option value="班组核算">班组核算</option>
                 <option value="五小攻关">五小攻关</option>
-                <option value="合理化建议">合理化建议</option>
+
                 <option value="改善提案">改善提案</option>
                 <option value="QCC活动">QCC活动</option>
                 <option value="创新计划">创新计划</option>
@@ -1470,11 +1471,12 @@
                         <option value="安全例会">安全例会</option>
                         <option value="质量互控">质量互控</option>
                         <option value="质量分析">质量分析</option>
+                        <option value="质量预控">质量预控</option>
                         <option value="电子台账">电子台账</option>
 
                         <option value="班组核算">班组核算</option>
                         <option value="五小攻关">五小攻关</option>
-                        <option value="合理化建议">合理化建议</option>
+
                         <option value="改善提案">改善提案</option>
                         <option value="QCC活动">QCC活动</option>
                         <option value="创新计划">创新计划</option>
@@ -1641,11 +1643,12 @@
                         <option value="安全例会">安全例会</option>
                         <option value="质量互控">质量互控</option>
                         <option value="质量分析">质量分析</option>
+                        <option value="质量预控">质量预控</option>
                         <option value="电子台账">电子台账</option>
 
                         <option value="班组核算">班组核算</option>
                         <option value="五小攻关">五小攻关</option>
-                        <option value="合理化建议">合理化建议</option>
+
                         <option value="改善提案">改善提案</option>
                         <option value="QCC活动">QCC活动</option>
                         <option value="创新计划">创新计划</option>
@@ -2677,33 +2680,64 @@
         </div>
         <h2>合理化建议记录添加</h2>
         <hr>
-        <form action="http://222.24.63.119/ublack" method="POST" enctype="multipart/form-data">
+        <form action="http://222.24.63.119/ublack"  method="POST"  enctype="multipart/form-data">
             <input type="hidden" name="_xsrf" value="2|8ed292fc|f2cb9d359ecd2fa71b73329064bddb8a|1541821002">
 
-            <input type="hidden" name="biao" value="10">
+            <input  type="hidden" name="biao" value="10">
             <input type="hidden" name="tag" value="2">
-            类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型: <select name="text1">
+            类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型: <select name="text1" id="helihua_Add_type">
             <option value="1" selected="selected">类型1</option>
             <option value="2">类型2</option>
             <option value="3">类型3</option>
             <option value="4">类型4</option>
         </select>
             <br>
-            内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容: <input id="txtCon" type="text" placeholder="建议内容"
-                                                                 class="input" name="text2">
+            内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容: <input id="txtCon" type="text" placeholder="建议内容" class="input" name="text2">
             <br>
             改善方案: <input id="txtCon" type="text" placeholder="改善方案" class="input" name="text3">
             <br>
-            备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注: <input id="txtCon" type="text" placeholder="备注" class="input"
-                                                                 name="text4">
+            备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注: <input id="txtCon" type="text" placeholder="备注" class="input" name="text4">
             <br>
             <div style="text-align:center;margin-top:10px;margin-left:50%;margin-bottom: 10px;">
-                <button type="submit" class="btn btn-primary">添加</button>
+                <button type="button" class="btn btn-primary" onclick="helihuaAdd()">添加</button>
                 <button type="reset" class="btn btn-warning" onclick="hiden7()">取消</button>
             </div>
-        </form>
-    </div>
+        </form></div>
 </div>
+<script>
+    function helihuaAdd(){
+        var fenzu=document.getElementById("wangyefenzu").innerHTML;
+        var inputs=document.getElementById("helihua").getElementsByTagName("input");
+        var type=$('#helihua_Add_type option:selected') .val();
+        var data={
+            "fenzu":fenzu,
+            "leixing":type,
+            "neirong":inputs[3].value,
+            "gaishanfangan":inputs[4].value,
+            "beizhu":inputs[5].value
+        }
+        data=JSON.stringify(data);
+        console.log(data);
+        $.ajax({
+            url:'/shenmu_war_exploded/heli/add',
+            type:'post',
+            data:data,
+            contentType:'application/json',
+            success:function(data){
+                alert("添加成功！");
+                console.log(data);
+                hiden7();
+                helihuagetMsg();
+   				inputs[3].value='';
+                inputs[4].value='';
+                inputs[5].value='';
+            },
+            error:function(data){
+                console.log("11111111111111111111111111");
+            }
+        });
+    }
+</script>
 <!--合理化建议的修改-->
 <div id="helihuagai" id="center">
     <div class="helihuagai-main" style="text-align: center;">
@@ -2712,33 +2746,111 @@
         </div>
         <h2>合理化建议记录修改</h2>
         <hr>
-        <form action="http://222.24.63.119/ublack" method="POST" enctype="multipart/form-data">
+        <form action="http://222.24.63.119/ublack"  method="POST"  enctype="multipart/form-data">
             <input type="hidden" name="_xsrf" value="2|d3e2f611|affbf9d8c3fd4b4a4643567d398dbf67|1541821002">
             <input id="helissss" type="hidden" name="合理化建议的id" value="">
-            <input type="hidden" name="biao" value="10">
+            <input  type="hidden" name="biao" value="10">
             <input type="hidden" name="tag" value="1">
-            类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型: <select name="text1">
+            类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型: <select name="text1" id="helihua_upadate_type">
             <option value="1" selected="selected">类型1</option>
             <option value="2">类型2</option>
             <option value="3">类型3</option>
             <option value="4">类型4</option>
         </select>
             <br>
-            内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容: <input id="txtCon" type="text" placeholder="建议内容"
-                                                                 class="input" name="text2">
+            内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容: <input id="txtCon" type="text" placeholder="建议内容" class="input" name="text2">
             <br>
             改善方案: <input id="txtCon" type="text" placeholder="改善方案" class="input" name="text3">
             <br>
-            备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注: <input id="txtCon" type="text" placeholder="备注" class="input"
-                                                                 name="text4">
+            备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注: <input id="txtCon" type="text" placeholder="备注" class="input" name="text4">
             <br>
             <div style="text-align:center;margin-top:10px;margin-left:50%;margin-bottom: 10px;">
-                <button type="submit" class="btn btn-success">修改</button>
+                <button  type="button" class="btn btn-success" onclick="helihuupadateAdd()">修改</button>
                 <button type="reset" class="btn btn-warning" onclick="hiden7gai()">取消</button>
+            </div>
+        </form></div>
+</div>
+<script>
+    function helihuupadateAdd(){
+        var fenzu=document.getElementById("wangyefenzu").innerHTML;
+        var inputs=document.getElementById("helihuagai").getElementsByTagName("input");
+        var type=$('#helihua_upadate_type option:selected').val();
+        var id=$("#helissss").val();
+        var data={
+            "fenzu":fenzu,
+            "id":id,
+            "leixing":type,
+            "neirong":inputs[4].value,
+            "gaishanfangan":inputs[5].value,
+            "beizhu":inputs[6].value
+        }
+        data=JSON.stringify(data);
+        console.log(data);
+        $.ajax({
+            url:'/shenmu_war_exploded/heli/update',
+            type:'post',
+            data:data,
+            contentType:'application/json',
+            success:function(data){
+                alert("添加成功！");
+                console.log(data);
+                hiden7gai();
+                helihuagetMsg();
+                inputs[4].value='';
+                inputs[5].value='';
+                inputs[6].value='';
+            },
+            error:function(data){
+                console.log("11111111111111111111111111");
+            }
+        });
+    }
+</script>
+<!--合理化建议的删除-->
+<div class="hrlihuadelete delete" style="display:none;">
+    <div class="delete-main">
+        <form action="http://222.24.63.119/ublack"  method="POST"  enctype="multipart/form-data">
+
+            <input id="helidel" type="hidden" name="审批id" value="">
+
+            <div>
+                <h4 style="color:red;margin-left:33%;" >是否确认删除？</h4>
+            </div>
+            <div style="margin-left:30%;" >
+                <button id="queren" type="button" class="btn btn-warning" onclick="helihuajianyidelete()">确认</button>
+                <button style="display:inline-block;margin-left:20%;" type="button" class="btn btn-default" onclick="helihuahiden()">取消</button>
+
             </div>
         </form>
     </div>
+
 </div>
+
+<script>
+    function helihuajianyidelete() {
+        var id = document.getElementById("helidel").getAttribute("value");
+        $.ajax({
+            url: '/shenmu_war_exploded/heli/delete/'+id,
+            type: "get",
+            success: function (data) {
+
+                alert("删除成功！");
+                helihuagetMsg();
+                helihuahiden()
+
+            },
+            error: function (data) {
+                alert("删除失败！");
+                helihuagetMsg();
+                helihuahiden()
+            }
+
+        });
+    }
+</script>
+
+
+
 
 <!-- <div id="delete" >
     <div class="delete-main">

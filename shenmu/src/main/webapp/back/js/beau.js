@@ -187,6 +187,21 @@ function hiden7gai(){
     var ban=document.getElementById("helihuagai");
     ban.style.display="none";
 }
+//合理化建议删除的点击事件
+$(document).on('click', '#helihuajianyi .btn-danger', function() {
+    var id=this.parentNode.getAttribute("class");
+    document.getElementById("helidel").setAttribute("value",id);
+    $(".hrlihuadelete").eq(0).slideToggle("slow");
+})
+function helihuahiden(){
+    $(".hrlihuadelete").eq(0).css("display","none");
+}
+
+
+
+
+
+
 function view1(){
     var ban=document.getElementById("gerenxinxi2");
     ban.style.display="none";
@@ -545,7 +560,7 @@ function tpm6sssgaiMsg(last_id){
     });
 }
 
-//合理化建议的修改
+//合理化建议的修改回显
 $(document).on('click', '#helihuajianyi .btn-primary', function() {
     var id=this.parentNode.getAttribute("class");
     document.getElementById("helissss").setAttribute("value",id);
@@ -554,33 +569,34 @@ $(document).on('click', '#helihuajianyi .btn-primary', function() {
 })
 function helihuagaiMsg(last_id){
     $.ajax({
-        url:"?id="+last_id+"&biao=10",
+        url:"/shenmu_war_exploded/heli/get/"+last_id,
         type:"get",
         success:function(data){
-           
-            var put_leibie=document.getElementById("anquan-gai").getElementsByTagName("select")[0];
-            var lvalue = data[0];
+
+            var put_leibie=document.getElementById("helihuagai").getElementsByTagName("select")[0];
+            var lvalue = data.leixing;
             if(lvalue!=""){
-               for(var i=0;i<put_leibie.options.length;i++){
-                   if(value==put_leibie.options[i].value){
-                    put_leibie.options[i].selected = 'selected';
-                    break;
-                     }
-                  }
+                for(var i=0;i<put_leibie.options.length;i++){
+                    if(lvalue==put_leibie.options[i].value){
+                        put_leibie.options[i].selected = 'selected';
+                        break;
+                    }
+                }
             }
-             var put_neirong=document.getElementById("anquan-gai").getElementsByTagName("input")[4];
-            put_neirong.value=data[1];
-            var put_beizhu=document.getElementById("anquan-gai").getElementsByTagName("input")[5];
-            put_beizhu.value=data[2];
-            
-            
+            var put_neirong=document.getElementById("helihuagai").getElementsByTagName("input")[4];
+            put_neirong.value=data.neirong;
+            var gaishanfangan=document.getElementById("helihuagai").getElementsByTagName("input")[5];
+            gaishanfangan.value=data.gaishanfangan;
+            var put_beizhu=document.getElementById("helihuagai").getElementsByTagName("input")[6];
+            put_beizhu.value=data.beizhu;
+
+
         },
         error:function(data){
             console.log(data);
         }
     });
 }
-
                   //ajax请求数据库的数据如下
 
 //个人信息的个人信息加载
@@ -1234,6 +1250,56 @@ function tpm6sgetMsg(){
         },
         error:function(data){
             console.log("出错！");
+        }
+    });
+}
+
+
+//合理化建议信息加载
+
+function helihuatou(){
+    var htm='';
+    htm+=`<tr id="thead">
+    <td>序号</td>
+    <td>类型</td>
+    <td>内容</td>
+    <td>改善方案</td>
+    <td>备注</td>
+    <td>操作</td>
+    </tr>
+    <tr>`;
+    $('#helihuajianyi').html(htm);
+}
+function helihuaaddMsg(i,leixing,neisong,gaishanfangan,beizhu,ID){
+
+    var html='';
+    html+=`<tr>
+    <td>${i+1}</td>
+    <td>${leixing}</td>
+    <td>${neisong}</td>
+    <td>${gaishanfangan}</td>
+    <td>${beizhu}</td>
+    <td><div class="${ID}">
+            <button type="button" class="btn btn-primary " >修改</button>
+            <button type="button" class="btn btn-danger">删除</button></div>
+    </td>
+    </tr>`;
+    $('#helihuajianyi').append(html);
+}
+function helihuagetMsg(){
+    var fenzu=document.getElementById("wangyefenzu").innerHTML;
+    $.ajax({
+        url:"/shenmu_war_exploded/heli/getList/"+fenzu,
+        type:"get",
+        success:function(data){
+            console.log(data);
+            helihuatou();
+            for(var i=0;i<data.length;i++){
+                helihuaaddMsg(i,data[i].leixing,data[i].neirong,data[i].gaishanfangan,data[i].beizhu,data[i].id);
+            }
+        },
+        error:function(data){
+            console.log("111111111111111111111111111111111111");
         }
     });
 }

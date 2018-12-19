@@ -24,6 +24,7 @@
         vertical-align: middle!important;
         }
         </style>
+        <link rel="stylesheet" href="../../file_view.css">
         <link href="./anquanlihui_files/content.css" type="text/css" rel="stylesheet">
         </head>
         <body>
@@ -295,7 +296,7 @@ width:50%;
 </div>
 <div class="row">
 
-<div class="col-xs-12 col-md-12">
+<div class="col-xs-12 col-md-12" id="updatefileview">
 <ul class="xueXiList">
 
 
@@ -329,17 +330,7 @@ width:50%;
 </div>
 </div>
 <script type="text/javascript">
-var nav = document.querySelectorAll(".navBtn");
-var contentBox = document.querySelectorAll(".contentBox");
-for (var i = 0; i <nav.length ; i++) {
-nav[i].index=i;
-nav[i].onclick=function(){
-for (var j = 0; j <contentBox.length ; j++) {
-contentBox[j].style.display="none";
-}
-contentBox[this.index].style.display="block";
-}
-}
+    banqiangetMsg('学习记录');
 </script>
 
 <footer>

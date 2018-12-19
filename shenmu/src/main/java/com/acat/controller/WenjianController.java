@@ -2,23 +2,26 @@ package com.acat.controller;
 
 import com.acat.model.Wenjian;
 import com.acat.service.IWenjianService;
+import com.acat.util.StringUtil;
+import com.acat.util.WordToHtml;
 import com.acat.vo.WenjianStrAndFenzuVo;
 import com.acat.vo.WenjianSuoshuAndFenzuVo;
 import com.acat.vo.WenjianVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 @RestController
 @RequestMapping("/wenjian")
-@SuppressWarnings("all")
 public class WenjianController {
 
     /**
@@ -82,7 +85,7 @@ public class WenjianController {
         String path = session.getServletContext().getRealPath("/wenjian");
         System.out.println(path);
 
-        String fileName = UUID.randomUUID() + file.getOriginalFilename();
+        String fileName = file.getOriginalFilename();
         System.out.println(fileName);
         File targetFile = new File(path, fileName);
         if (!targetFile.exists()) {
@@ -154,6 +157,38 @@ public class WenjianController {
         return list;
     }
 
+
+    @PostMapping(value="/getListWenjianBySuoshuAndFenzu")
+    public List<Wenjian> getListWenjianBySuoshuAndFenzu(@RequestBody WenjianSuoshuAndFenzuVo vo){
+        System.out.println(vo.getSuoshufenlei());
+        System.out.println(vo.getFenzu());
+
+        List<Wenjian> list = WenjianService.getListWenjianBySuoshufenlei(vo);
+        return list;
+    }
+
+    @GetMapping(value="/getWenjianToHtmlById/{id}")
+    public List<String> getWenjianToHtmlById(@PathVariable("id") Integer id,HttpSession session) throws Exception{
+
+
+
+        String path = session.getServletContext().getRealPath("/wenjian/");
+
+        List<String> list = new ArrayList<>();
+
+        Wenjian wenjian = WenjianService.getWenjianById(id);
+        System.out.println(wenjian.getWenjianmingcheng());
+        String wenjianName = StringUtil.qiegeqianmian(wenjian.getWenjianmingcheng());
+
+        WordToHtml.Word2003ToHtml(path,path,wenjian.getWenjianmingcheng(),wenjianName+".html");
+
+        list.add(wenjian.getFaburen());
+        list.add(wenjian.getFabushijian());
+        list.add("wenjian/"+wenjian.getWenjianmingcheng());
+        list.add("wenjian/"+wenjianName+".html");
+
+        return list;
+    }
 
     /**
      * 文件下载
