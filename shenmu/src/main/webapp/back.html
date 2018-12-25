@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" type="text/css" href="back/css/beau.css">
     <link rel="stylesheet" type="text/css" href="back/css/bootstrap.css">
-
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <script src="back/js/jquery.js"></script>
     <script src="back/js/bootstrap.js"></script>
     <script src="back/js/beau.js"></script>
@@ -130,9 +130,9 @@
 </span>
         </li>
 
-        <li style="margin-top:20px;" class="Leftnav">
-            <img src="back/imgs/hot.png">
-            <p>
+        <li style="margin-top:20px;" class="Leftnav" onclick="anquangetMsg()">
+            <img src="back/imgs/hot.png" onclick="anquangetMsg()">
+            <p onclick="anquangetMsg()">
                 安全关键作业
             </p>
             <span>
@@ -154,6 +154,16 @@
             <img src="back/imgs/hot.png" onclick="helihuagetMsg()">
             <p onclick="helihuagetMsg()">
                 合理化建议
+            </p>
+            <span>
+&gt;
+</span>
+        </li>
+
+        <li style="margin-top:20px;" class="Leftnav" onclick="xuexigetMsg()">
+            <img src="back/imgs/hot.png" onclick="xuexigetMsg()">
+            <p onclick="xuexigetMsg()">
+                学习资料
             </p>
             <span>
 &gt;
@@ -210,7 +220,7 @@
 审批管理
 </span>
 
-        <span>
+        <span onclick="anquangetMsg()">
 安全作业
 </span>
 
@@ -220,6 +230,9 @@
 
         <span onclick="helihuagetMsg()">
 合理化建议
+</span>
+        <span onclick="xuexigetMsg()">
+学习资料
 </span>
 
         <span>
@@ -1305,7 +1318,7 @@
             <select name="text3" id="wenjianseachfenlei" style="display: block">
                 <option value="电子审批">电子审批</option>
                 <option value="学习记录">学习记录</option>
-                <option value="学习资料">学习资料</option>
+
                 <option value="风险预控">风险预控</option>
                 <option value="安全例会">安全例会</option>
                 <option value="质量互控">质量互控</option>
@@ -1466,7 +1479,7 @@
                     <select name="text3" id="wenjianpostfenlei">
                         <option value="电子审批">电子审批</option>
                         <option value="学习记录">学习记录</option>
-                        <option value="学习资料">学习资料</option>
+
                         <option value="风险预控">风险预控</option>
                         <option value="安全例会">安全例会</option>
                         <option value="质量互控">质量互控</option>
@@ -1638,7 +1651,7 @@
                     <select name="text3" id="wenjianpostfenleigaiupdate">
                         <option value="电子审批">电子审批</option>
                         <option value="学习记录">学习记录</option>
-                        <option value="学习资料">学习资料</option>
+
                         <option value="风险预控">风险预控</option>
                         <option value="安全例会">安全例会</option>
                         <option value="质量互控">质量互控</option>
@@ -2201,12 +2214,9 @@
 <div class="content" style="height: 100%; display: block;">
 
     <div class="inform" style="margin-top:-2px;">
-        <h1 style="margin-left:30%;" class="conh1">安全性作业记录
-            <button class="btn btn-default" title="添加人员信息" id="renyuanadd" onclick="show5()">添加</button>
-        </h1>
+        <h1 style="margin-left:30%;" class="conh1">安全性作业记录<button class="btn btn-default" title="添加人员信息" id="renyuanadd" onclick="show5()">添加</button></h1>
         <table id="anquanxingzuoye" class=" table table-hover table-striped">
-            <tbody>
-            <tr id="thead">
+            <tbody><tr id="thead">
                 <td>序号</td>
                 <td>关键项目</td>
                 <td>类别</td>
@@ -2218,16 +2228,13 @@
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
-                <td>
-                    <div class="1">
-                        <button type="button" class="btn btn-primary">修改</button>
-                        <button type="button" class="btn btn-danger">删除</button>
-                    </div>
+                <td><div class="6">
+                    <button type="button" class="btn btn-primary" >修改</button>
+                    <button type="button" class="btn btn-danger">删除</button></div>
                 </td>
             </tr>
 
-            </tbody>
-        </table>
+            </tbody></table>
     </div>
 </div>
 
@@ -2240,11 +2247,11 @@
             <h4>添加安全关键作业记录</h4>
         </div>
         <hr>
-        <form action="http://222.24.63.119/ublack" method="POST" enctype="multipart/form-data">
+        <form action="http://222.24.63.119/ublack" method="POST"  enctype="multipart/form-data">
             <table class="seven-table">
                 <input type="hidden" name="" value="2|9acdb3d7|94ffd5e2f7dc98d31b8a99d0b28a7681|1541770942">
                 <input type="hidden" name="" value="zgjf">
-                <input type="hidden" name="biao" value="8">
+                <input  type="hidden" name="biao" value="8">
                 <input type="hidden" name="tag" value="2">
                 <tbody>
                 <tr>
@@ -2252,7 +2259,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="dtt">关键项目</td>
-                    <td colspan="2" class="ddt">卡控措施</td>
+                    <td colspan="2" class="ddt"><input type="text" name="text0" placeholder="关键项目"></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="dtt">名称</td>
@@ -2260,31 +2267,103 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="dtt">简单描述</td>
-                    <td colspan="2" class="ddt"><textarea name="text2" placeholder="简单描述" cols="30" rows="6"></textarea>
-                    </td>
+                    <td colspan="2" class="ddt"><textarea name="text2"  placeholder="简单描述" cols="30" rows="6"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="dtt">文件上传</td>
-                    <td colspan="2" class="ddt"><input name="text3" type="file" value="选择文件"></td>
+                    <td colspan="2" class="ddt"><input id="anquanwork_file" name="text3" type="file" value="选择文件"></td>
                 </tr>
                 <tr>
                     <td colspan="2" class="dtt">文件类型</td>
                     <td colspan="2" class="ddt">
-                        <input name="text4" type="radio" name="wupian" value="图片">图片
+                        <input name="text4" type="radio"  value="图片">图片
 
-                        <input name="text4" type="radio" name="shiping" value="视频">视频
+                        <input name="text4" type="radio"  value="视频">视频
 
-                        <input name="text4" type="radio" name="wendang" value="文档">文档
+                        <input name="text4" type="radio"  value="文档">文档
                     </td>
                 </tr>
                 </tbody>
             </table>
             <div style="text-align:center;margin-top:10px;margin-left:30%;margin-bottom: 10px;">
 
-                <button type="submit" class="btn btn-success">添加</button>
+                <button type="button" class="btn btn-success" onclick="anquanwork_Add()">添加</button>
                 <button type="reset" class="btn btn-warning" onclick="hiden5()">取消</button>
             </div>
         </form>
+        <script>
+            function anquanwork_Add(){
+                // var fenzu=document.getElementById("wangyefenzu").innerHTML;
+                var inputs=document.getElementById("anquan").getElementsByTagName("input");
+                var textareas=document.getElementById("anquan").getElementsByTagName("textarea");
+                var type=$("#anquan input[type='radio']:checked").val();
+                var fenzu=document.getElementById("wangyefenzu").innerHTML;
+                var data={
+                    "fenzu":fenzu,
+                    "guanjianxiangmu":inputs[4].value,
+                    "name":inputs[5].value,
+                    "jiandanmiaoshu":textareas[0].value,
+                    "wenjianleixing":type
+                }
+                data=JSON.stringify(data);
+                console.log(data);
+                $.ajax({
+                    url:'/shenmu_war_exploded/anquanzuoye/addPutongziduan',
+                    type:'post',
+                    data:data,
+                    contentType:'application/json',
+                    success:function(data) {
+                        if (inputs[4].value == '') {
+                            alert("关键项目没有填写！");
+                        } else if (inputs[5].value == '') {
+                            alert("名称没有写！");
+                        }else if(textareas[0].value==''){
+                            alert("描述为空");
+                        }else if($("#anquan input[type='radio']:checked").val()==''){
+                            alert("描述为空");
+                        }else if($("#anquanwork_file").val()==''){
+                            alert("文件类型未选择！");
+                        }else{
+
+                            alert("添加成功！");
+                            console.log(data);
+                            anquanworl_file_add();
+                            hiden5();
+
+                            inputs[4].value='';
+                            inputs[5].value='';
+                            textareas[0].value='';
+                            $("#anquan input[type='radio']:checked").val('');
+                        }
+
+                    },
+                    error:function(data){
+                        console.log("11111111111111111111111111");
+                    }
+                });
+            }
+            function anquanworl_file_add(){
+                var formData = new FormData();
+                formData.append('file', $('#anquanwork_file')[0].files[0]);
+                console.log(formData);
+                $.ajax({
+                    url:'/shenmu_war_exploded/anquanzuoye/addWenjianshangchuan',
+                    type:'post',
+                    cache: false,
+                    data:formData,
+                    processData: false,
+                    contentType: false,
+                    enctype:"multipart/form-data",
+                    success:function(data){
+                        $('#anquanwork_file').val('');
+                        anquangetMsg();
+                    },
+                    error:function(data){
+                        anquangetMsg();
+                    }
+                });
+            }
+        </script>
 
     </div>
 </div>
@@ -2294,42 +2373,171 @@
 <div id="anquan-gai">
     <div class="anquan-gai-main">
         <div style="margin-bottom:20px;">
-            <button class="xiaoshi" onclick="hiden5gai()"><span>×</span></button>
+            <button  class="xiaoshi" onclick="hiden5gai()"><span>×</span></button>
             <h4>修改安全关键作业记录</h4>
         </div>
         <hr>
         <div>
-            <form action="http://222.24.63.119/ublack" method="POST" enctype="multipart/form-data">
+            <form action="http://222.24.63.119/ublack"  method="POST"  enctype="multipart/form-data">
                 <input type="hidden" name="_xsrf" value="2|d3e2f611|affbf9d8c3fd4b4a4643567d398dbf67|1541821002">
                 <input id="anquansss" type="hidden" name="安全作业修改的id" value="">
-                <input type="hidden" name="biao" value="8">
+                <input  type="hidden" name="biao" value="8">
                 <input type="hidden" name="tag" value="1">
-                <div class="form-group">
-                    <label for="">安全关键项目名称:</label>
-                    <input type="text1" class="" style="width:20%;">
-                </div>
-                <div class="form-group">
-                    <label for="">类别:</label>
-                    <select name="text2" id="">
-                        <option value="1">图片</option>
-                        <option value="2">视频</option>
-                        <option value="3">文档</option>
+                <table class="seven-table">
+                    <tbody>
+                    <tr>
+                        <td colspan="4">安全关键作业</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="dtt">关键项目</td>
+                        <td colspan="2" class="ddt"><input type="text" name="text0" placeholder="关键项目"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="dtt">名称</td>
+                        <td colspan="2" class="ddt"><input type="text" name="text1" placeholder="名称"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="dtt">简单描述</td>
+                        <td colspan="2" class="ddt"><textarea name="text2"  placeholder="简单描述" cols="30" rows="6"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="dtt">文件上传</td>
+                        <td colspan="2" class="ddt"><input id="anquanwork_updafile" name="text3" type="file" value="选择文件"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="dtt">文件类型</td>
+                        <td colspan="2" class="ddt">
+                            <input name="anquanuplei" type="radio" name="wupian" value="图片">图片
 
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="">描述:</label>
-                    <textarea name="text3" id="" cols="60" rows="5"></textarea>
-                </div>
+                            <input name="anquanuplei" type="radio" name="shiping" value="视频">视频
+
+                            <input name="anquanuplei" type="radio" name="wendang" value="文档">文档
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
                 <div style="text-align:center;margin-top:10px;margin-left:30%;margin-bottom: 10px;">
-                    <button type="submit" class="btn btn-success">修改</button>
+                    <button type="button" class="btn btn-success" onclick="anquanwork_Gai()" >修改</button>
                     <button type="reset" class="btn btn-warning" onclick="hiden5gai()">取消</button>
                 </div>
             </form>
         </div>
+        <script>
+            function anquanwork_Gai(){
 
+                var inputs=document.getElementById("anquan-gai").getElementsByTagName("input");
+                var textareas=document.getElementById("anquan-gai").getElementsByTagName("textarea");
+                var type=$("#anquan-gai input[type='radio']:checked").val();
+                var fenzu=document.getElementById("wangyefenzu").innerHTML;
+                var id=document.getElementById("anquansss").value;
+                var data={
+                    "fenzu":fenzu,
+                    "id":id,
+                    "guanjianxiangmu":inputs[4].value,
+                    "name":inputs[5].value,
+                    "jiandanmiaoshu":textareas[0].value,
+                    "wenjianleixing":type
+                }
+                data=JSON.stringify(data);
+                console.log(data);
+                $.ajax({
+                    url:'/shenmu_war_exploded/anquanzuoye/updatePutongziduan',
+                    type:'post',
+                    data:data,
+                    contentType:'application/json',
+                    success:function(data){
+                        if (inputs[4].value == '') {
+                            alert("关键项目没有填写！");
+                        } else if (inputs[5].value == '') {
+                            alert("名称没有写！");
+                        }else if(textareas[0].value==''){
+                            alert("描述为空");
+                        }else if($("#anquan-gai input[type='radio']:checked").val()==''){
+                            alert("文件类型未选择");
+                        }else if($("#anquanwork_updafile").val()==''){
+                            alert("文件未选择！");
+                        }else{
+                            alert("修改成功！");
+                            console.log(data);
+                            anquanworl_file_gai();
+                            hiden5gai();
+
+                            inputs[4].value='';
+                            textareas[0].value='';
+                            $("#anquan-gai input[type='radio']:checked").val('');
+                        }
+
+                    },
+                    error:function(data){
+                        console.log("11111111111111111111111111");
+                    }
+                });
+            }
+            function anquanworl_file_gai(){
+                var formData = new FormData();
+                formData.append('file', $('#anquanwork_updafile')[0].files[0]);
+                console.log(formData);
+                $.ajax({
+                    url:'/shenmu_war_exploded/anquanzuoye/updateWenjianshangchuan',
+                    type:'post',
+                    cache: false,
+                    data:formData,
+                    processData: false,
+                    contentType: false,
+                    enctype:"multipart/form-data",
+                    success:function(data){
+                        $('#anquanwork_updafile').val('');
+                        anquangetMsg();
+                    },
+                    error:function(data){
+                        anquangetMsg();
+                    }
+                });
+            }
+        </script>
     </div>
 </div>
+<!--安全作业的删除-->
+<div class="anquanworkdelete delete" style="display:none;">
+    <div class="delete-main">
+        <form action="http://222.24.63.119/ublack"  method="POST"  enctype="multipart/form-data">
+
+            <input id="anquanworkdel" type="hidden" name="安全作业删除id" value="">
+
+            <div>
+                <h4 style="color:red;margin-left:33%;" >是否确认删除？</h4>
+            </div>
+            <div style="margin-left:30%;" >
+                <button id="queren" type="button" class="btn btn-warning" onclick="anquanwork_delete()">确认</button>
+                <button style="display:inline-block;margin-left:20%;" type="button" class="btn btn-default" onclick="anquanworkhiden()">取消</button>
+
+            </div>
+        </form>
+    </div>
+
+</div>
+<script>
+    function anquanwork_delete() {
+        var id = document.getElementById("anquanworkdel").getAttribute("value");
+        $.ajax({
+            url: '/shenmu_war_exploded/anquanzuoye/deleteAnquanzuoye/'+id,
+            type: "get",
+            success: function (data) {
+
+                alert("删除成功！");
+                anquanworkhiden();
+                anquangetMsg();
+
+            },
+            error: function (data) {
+                alert("删除失败！");
+                anquanworkhiden();
+                anquangetMsg();
+            }
+
+        });
+    }
+</script>
 
 
 <!-- 6s tpm -->
@@ -2849,26 +3057,405 @@
     }
 </script>
 
+<!-- 学习资料 111111111111111111111111111111111111111111111111111 -->
+<div class="content" style="height: 100%; display: none;">
 
+    <div class="inform" style="margin-top:-5px;">
+        <h1 style="margin-left:30%">学习资料
+            <button class="btn btn-default" title="添加学习资料信息"  id="renyuanadd"  onclick="show8()">添加</button></h1>
+        <table id="xuexiziliao" class=" table table-hover table-striped" >
+            <tbody><tr id="thead">
+                <td>序号</td>
+                <td>文件名</td>
+                <td>所属分类</td>
+                <td>发布人</td>
+                <td>发布时间</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>
+                    1
+                </td>
+                <td>1</td>
+                <td>1</td>
+                <td><div class="1">
+                    <button type="button" class="btn btn-primary" >修改</button>
+                    <button type="button" class="btn btn-danger">删除</button></div>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>1</td>
+                <td>
+                    1
+                </td>
+                <td>1</td>
+                <td>1</td>
+                <td><div class="2">
+                    <button type="button" class="btn btn-primary" >修改</button>
+                    <button type="button" class="btn btn-danger">删除</button></div>
+                </td>
+            </tr>
 
+            </tbody></table>
+    </div>
+</div>
+<!--  学习资料添加的表单-->
+<div id="xuexiziliao_add">
+    <div class="xuexiziliao_add-main">
+        <div style="margin-bottom:20px;">
 
-<!-- <div id="delete" >
-    <div class="delete-main">
+            <h4>新加文件记录</h4>
+        </div>
+        <hr>
+        <div>
             <form action="http://222.24.63.119/ublack"  method="POST"  enctype="multipart/form-data">
                 <input type="hidden" name="_xsrf" value="2|d3e2f611|affbf9d8c3fd4b4a4643567d398dbf67|1541821002">
-                <input id="sssss" type="hidden" name="formname" value="0">
-                <div>
-                 <h4 style="color:red;margin-left:33%;" >是否确认删除？</h4>
+                <input  type="hidden" name="formname1" value="4">
+                <input  type="hidden" name="formname2" value="0">
+                <input  type="hidden" name="formname3" value="0">
+                <input  type="hidden" name="biao" value="5">
+                <input type="hidden" name="tag" value="2">
+                <div class="form-group">
+                    <label for="">选择文件：</label>
+                    <input name="text1" type="file" class="" style="width:70%;" id="xuexi_addfile">
                 </div>
-                <div style="margin-left:30%;" >
-                        <button id="queren" type="submit" class="btn btn-warning">确认</button>
-                <button style="display:inline-block;margin-left:20%;" type="button" class="btn btn-default" onclick="deletow()">取消</button>
-                
+                <div class="form-group">
+                    <label for="">发布人：</label>
+                    <input name="text2" type="text" rows="30" cols="20" class="" value="" style="width:30%;">
                 </div>
-        </form>
+                <div class="form-group">
+                    <label for="">时间：</label>
+                    <input name="text4" type="date" name="user_date" value="2000-06-08" id="user_date">
+                </div>
+                <div class="form-group">
+                    <label for="">类别：</label>
+                    <select name="text3" id="xuexipost_fenlei">
+                        <option value="法律法规">法律法规</option>
+                        <option value="规章制度">规章制度</option>
+
+                        <option value="上级发文">上级发文</option>
+                        <option value="OPL课程">OPL课程</option>
+                        <option value="学习视频">学习视频</option>
+                        <option value="作业手册">作业手册</option>
+                        <option value="专业教材">专业教材</option>
+                        <option value="案例汇编">案例汇编</option>
+
+                    </select>
+                </div>
+
+
+                <div style="text-align:center;margin-top:10px;margin-left:50%;margin-bottom: 10px;">
+                    <button type="button" class="btn btn-primary" onclick="xuexiziliao_Add()">添加</button>
+                    <button type="reset" class="btn btn-warning" onclick="hiden8()">取消</button>
+                </div>
+            </form>
         </div>
-          
-    </div> -->
+
+    </div>
+</div>
+<script>
+    //文件添加的接口
+
+    //文件添加的接口
+
+    function xuexiziliao_Add(){
+        var fenzu=document.getElementById("wangyefenzu").innerHTML;
+        var inputs=document.getElementById("xuexiziliao_add").getElementsByTagName("input");
+        var texts=document.getElementById("xuexiziliao_add").getElementsByTagName("textarea");
+        var sel=document.getElementById("xuexipost_fenlei");
+        var index = sel.selectedIndex;
+        var albumid= sel.options[index].value;
+        var data1={
+            "fenzu":fenzu,
+            "faburen":inputs[7].value,
+            "leibie":albumid,
+            "fabushijian":inputs[8].value
+        }
+        console.log(data1);
+        data1=JSON.stringify(data1);
+        console.log(data1);
+
+        $.ajax({
+            url:'/shenmu_war_exploded/xuexiziliao/addPutongziduan',
+            type:'post',
+            data:data1,
+            dataType:'json',
+            contentType: 'application/json',
+            success:function(data){
+                console.log(inputs[8].value='');
+                if($("#xuexi_addfile").val()==''){
+                    alert("未选择文件！");
+                }else if(inputs[7].value==''){
+                    alert("未填写发布人！");
+                }else if(inputs[8].value=='2000-06-08'){
+                    alert("未选择时间！");
+                    inputs[8].value='';
+                }else{
+                    xuexi_Add_file();
+                }
+
+
+            },
+            error:function(data){
+                console.log(inputs[8].value='');
+                if($("#xuexi_addfile").val()==''){
+                    alert("未选择文件！");
+                }else if(inputs[7].value==''){
+                    alert("未填写发布人！");
+                }else if(inputs[8].value=='2000-06-08'){
+                    alert("未选择时间！");
+                    inputs[8].value='';
+                }else{
+                    xuexi_Add_file();
+                }
+
+
+            }
+        });
+    }
+    function xuexi_Add_file() {
+        var inputs=document.getElementById("xuexiziliao_add").getElementsByTagName("input");
+        var formData = new FormData();
+        formData.append('file', $('#xuexi_addfile')[0].files[0]);
+
+        console.log(formData);
+        $.ajax({
+            url:'/shenmu_war_exploded/xuexiziliao/addWenjian',
+            type:'post',
+            cache: false,
+            data:formData,
+            processData: false,
+            contentType: false,
+            enctype:"multipart/form-data",
+            success:function(data){
+                alert("上传成功！");
+                hiden8();
+                xuexigetMsg();
+                $("#xuexi_addfile").val("");
+                inputs[7].value='';
+                inputs[8].value='';
+                $('.xuexipost_fenlei').each(function (i, j) {
+                    $(j).find("option:selected").attr("selected", false);
+                    $(j).find("option").first().attr("selected", true);
+                });
+            },
+            error:function(data){
+                alert("上传失败！");
+                hiden8();
+                xuexigetMsg();
+                $("#xuexi_addfile").val("");
+                inputs[7].value='';
+                inputs[8].value='';
+                $('.xuexipost_fenlei').each(function (i, j) {
+                    $(j).find("option:selected").attr("selected", false);
+                    $(j).find("option").first().attr("selected", true);
+                });
+
+            }
+        });
+    }
+
+</script>
+<!--  学习资料修改的隐藏表单-->
+<div id="xuexiziliao-gai">
+    <div class="xuexi-gai-main">
+        <div style="margin-bottom:20px;">
+
+            <h4>上传文件</h4>
+        </div>
+        <hr>
+        <div>
+            <form action="http://222.24.63.119/ublack" method="POST"  enctype="multipart/form-data">
+                <input type="hidden" name="_xsrf" value="2|d3e2f611|affbf9d8c3fd4b4a4643567d398dbf67|1541821002">
+                <input  type="hidden" name="formname1" value="4">
+                <input  type="hidden" name="formname2" value="0">
+                <input  type="hidden" name="formname3" value="0">
+
+                <input id="xuexisssss" type="hidden" name="文件管理id" value="">
+                <input type="hidden" value="1">
+                <input  type="hidden" name="biao" value="5">
+                <input type="hidden" name="tag" value="1">
+                <div class="form-group">
+                    <label for="">选择文件：</label>
+                    <input name="text1" type="file" class="" style="width:70%;" id="xuexi_upadafile">
+                </div>
+                <div class="form-group">
+                    <label for="">发布人：</label>
+                    <input name="text2" type="text" rows="30" cols="20" class="" style="width:30%;">
+                </div>
+                <div class="form-group">
+                    <label for="">时间：</label>
+                    <input name="text4" type="date" name="user_date" value="2018/11/11 10:41" id="user_date">
+                </div>
+
+                <div class="form-group">
+                    <label for="">所属分类：</label>
+                    <select name="text3" id="xuexipostfenleigaiupdate">
+                        <option value="法律法规">法律法规</option>
+                        <option value="规章制度">规章制度</option>
+
+                        <option value="上级发文">上级发文</option>
+                        <option value="OPL课程">OPL课程</option>
+                        <option value="学习视频">学习视频</option>
+                        <option value="作业手册">作业手册</option>
+                        <option value="专业教材">专业教材</option>
+                        <option value="案例汇编">案例汇编</option>
+
+                    </select>
+                    <div class="form-group">
+                        <label for="">上传要求：</label>
+                        <span style="color:red">图片类不得大于500KB <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 文档类不得大于10M <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;视频类不得大于20M <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不得上传违法乱纪内容 </span>
+                    </div>
+                </div>
+                <div style="text-align:center;margin-top:10px;margin-left:50%;margin-bottom: 10px;">
+                    <button type="button" class="btn btn-success" onclick="xuexiziliaoapedatechuan()">修改</button>
+                    <button type="button" class="btn btn-warning" onclick="hiden8gai()">取消</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<script>
+    //学习资料修改提交的接口
+    function xuexiziliaoapedatechuan(){
+        var fenzu=document.getElementById("wangyefenzu").innerHTML;
+        var id=document.getElementById("xuexisssss").value;
+        var inputs=document.getElementById("xuexiziliao-gai").getElementsByTagName("input");
+
+        var sel=document.getElementById("xuexipostfenleigaiupdate");
+        var index = sel.selectedIndex;
+        var albumid= sel.options[index].value;
+        var data1={
+            "fenzu":fenzu,
+            "id":Number(id),
+            "faburen":inputs[9].value,
+            "leibie":albumid,
+            "fabushijian":inputs[10].value
+        }
+        console.log(data1);
+        data1=JSON.stringify(data1);
+        console.log(data1);
+
+        $.ajax({
+            url:'/shenmu_war_exploded/xuexiziliao/updatePutongziduan',
+            type:'post',
+            data:data1,
+            dataType:'json',
+            contentType: 'application/json',
+            success:function(data){
+                if($("#xuexi_upadafile").val()==''){
+                    alert("未选择文件！");
+                }else if(inputs[9].value==''){
+                    alert("未填写发布人！");
+                }else if(inputs[10].value=='2018/11/11 10:41'){
+                    alert("未选择时间！");
+                    inputs[10].value='';
+                }else{
+                    xuexiziliaoupdatefile();
+                }
+
+            },
+            error:function(data){
+                if($("#xuexi_upadafile").val()==''){
+                    alert("未选择文件！");
+                }else if(inputs[9].value==''){
+                    alert("未填写发布人！");
+                }else if(inputs[10].value=='2018/11/11 10:41'){
+                    alert("未选择时间！");
+                    inputs[10].value='';
+                }else{
+                    xuexiziliaoupdatefile();
+                }
+
+
+            }
+        });
+    }
+    function xuexiziliaoupdatefile(){
+        var formData = new FormData();
+        formData.append('file', $('#xuexi_upadafile')[0].files[0]);
+
+        console.log(formData);
+        $.ajax({
+            url:'/shenmu_war_exploded/xuexiziliao/updateWenjian',
+            type:'post',
+            cache: false,
+            data:formData,
+            processData: false,
+            contentType: false,
+            enctype:"multipart/form-data",
+            success:function(data){
+                alert("修改成功！");
+                hiden8gai();
+                xuexigetMsg();
+            },
+            error:function(data){
+                alert("修改失败！");
+                hiden8gai();
+                xuexigetMsg();
+            }
+        });
+    }
+</script>
+
+<!--学习资料的删除-->
+<div class="xuexidelete delete" style="display:none;">
+    <div class="delete-main">
+        <form action="http://222.24.63.119/ublack"  method="POST"  enctype="multipart/form-data">
+            <input type="hidden" name="_xsrf" value="2|d3e2f611|affbf9d8c3fd4b4a4643567d398dbf67|1541821002">
+            <input  type="hidden" name="formname1" value="4">
+            <input  type="hidden" name="formname2" value="0">
+            <input  type="hidden" name="formname3" value="0">
+            <input id="xuexidel" type="hidden" name="删除文件的id" value="">
+            <input type="hidden" name="删除标志" value="0">
+            <input  type="hidden" name="biao" value="5">
+            <input type="hidden" name="tag" value="0">
+            <div>
+                <h4 style="color:red;margin-left:33%;" >是否确认删除？</h4>
+            </div>
+            <div style="margin-left:30%;" >
+                <button id="queren" type="button" class="btn btn-warning" onclick="xuexidedelete()">确认</button>
+                <button style="display:inline-block;margin-left:20%;" type="button" class="btn btn-default" onclick="xuexihiden()">取消</button>
+
+            </div>
+        </form>
+    </div>
+    <script>
+        //文件的删除
+
+        function xuexidedelete(){
+            var fenzu=document.getElementById("wangyefenzu").innerHTML;
+            var id=document.getElementById("xuexidel").value;
+
+            $.ajax({
+                url:'/shenmu_war_exploded/xuexiziliao/deleteXuexiziliao/'+id,
+                type:'get',
+                success:function(){
+                    alert("删除成功！");
+                    xuexihiden();
+                    xuexigetMsg();
+
+                },
+                error:function(){
+                    alert("删除失败！");
+                    xuexihiden();
+                    xuexigetMsg();
+                }
+            })
+        }
+
+    </script>
+</div>
+
+
+
+
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
         $(".btn_center").click(function () {

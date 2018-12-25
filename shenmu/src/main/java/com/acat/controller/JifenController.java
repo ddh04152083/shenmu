@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +62,7 @@ public class JifenController {
         System.out.println(type.getFenzu());
         Integer fenzu=type.getFenzu();
         System.out.println("-----------------------------------------");
-        Map<String,List<Jifen>> map = new HashMap<>();
+        Map<String,List<Jifen>> map = new LinkedHashMap<>();
         List<Jifen> list = null;
         String riqi02 = null;
 

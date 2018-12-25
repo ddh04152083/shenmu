@@ -98,22 +98,40 @@
     $(document).on('click', '.lilisi a', function() {
         document.getElementsByClassName("xueXiList")[0].style.display="none";
         var id=this.getAttribute("class");
+        var tag=this.getAttribute("tag");
+        console.log(tag);
         console.log(id);
         var fenzu=getQueryString("fenzu");
+        if(tag==1){
+            $.ajax({
+                url:"/shenmu_war_exploded/anquanzuoye/getWenjianToHtmlById/"+id,
+                type:"get",
 
-        $.ajax({
-            url:"/shenmu_war_exploded/wenjian/getWenjianToHtmlById/"+id,
-            type:"get",
+                success:function(data){
+                    console.log(data);
+                    show_loadfile(data)
+                },
+                error:function(data){
+                    console.log(data);
+                    show_loadfile(data);
+                }
+            });
+        }else{
+            $.ajax({
+                url:"/shenmu_war_exploded/wenjian/getWenjianToHtmlById/"+id,
+                type:"get",
 
-            success:function(data){
-                console.log(data);
-                show_loadfile(data)
-            },
-            error:function(data){
-                console.log(data);
-                show_loadfile(data);
-            }
-        });
+                success:function(data){
+                    console.log(data);
+                    show_loadfile(data)
+                },
+                error:function(data){
+                    console.log(data);
+                    show_loadfile(data);
+                }
+            });
+        }
+
 
     })
     //显示html文件
@@ -128,11 +146,56 @@
         <p id="headtitle">${data[1]} ${data[0]}</p> 
         
         <center><p>${data[1]} <a href="http://localhost:8080/shenmu_war_exploded/${data[2]}" download>下载</a></p></center>
-        <object type="text/html" data="http://localhost:8080/shenmu_war_exploded/${data[3]}" width="100%" height="100%" style="height: 800px"></object>
+        <object type="text/html" data="http://localhost:8080/shenmu_war_exploded/${data[3]}" width="100%" height="100%" style="height: 800px;width:70%;margin-left: 15%;"></object>
         </div>`;
 
         $('#updatefileview').append(htm);
         document.getElementsByClassName("inform")[0].style.display="block";
+    }
+//安全关键项目作业的页面显示
+    function anquangetMsg(suoshuleibie){
+
+        var fenzu=getQueryString("fenzu");
+        var data={
+            "fenzu":fenzu,
+            "suoshufenlei":suoshuleibie
+        }
+        console.log(data);
+        data=JSON.stringify(data);
+        console.log(data);
+        $.ajax({
+            url:"/shenmu_war_exploded/anquanzuoye/getAnquanzuoyeByFenzu/"+fenzu,
+            type:"get",
+
+            success:function(data){
+                console.log(data);
+                anquanaddMsg(data)
+            },
+            error:function(data){
+                console.log(data);
+                anquanaddMsg(data);
+            }
+        });
+    }
+    function anquanaddMsg(data){
+
+        var html=`<ul class="xueXiList">`;
+        for(var i=0;i<data.length;i++){
+
+            html+=`<li class="lilisi">
+                <span class="titleList">
+                <a class="${data[i].id}" tag="1"> ${data[i].name}&nbsp;&nbsp;&nbsp;${data[i].wenjianshangchuan} </a>
+                </span>
+                <span class="authorList">
+
+                </span>
+                <span class="timeList">
+                ${data[i].wenjianleixing}
+                </span>
+                </li>`;
+        }
+        $('#updatefileview').html(html);
+
     }
 
 

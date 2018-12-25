@@ -139,7 +139,14 @@ function hiden5gai(){
     var ban=document.getElementById("anquan-gai");
     ban.style.display="none";
 }
-
+$(document).on('click', '#anquanxingzuoye .btn-danger', function() {
+    var id=this.parentNode.getAttribute("class");
+    document.getElementById("anquanworkdel").setAttribute("value",id);
+    $(".anquanworkdelete").eq(0).slideToggle("slow");
+})
+function anquanworkhiden(){
+    $(".anquanworkdelete").eq(0).css("display","none");
+}
 
 
 
@@ -197,7 +204,30 @@ function helihuahiden(){
     $(".hrlihuadelete").eq(0).css("display","none");
 }
 
+function show8(){
 
+    $("#xuexiziliao_add").slideToggle("slow");
+}
+
+function hiden8(){
+    var ban=document.getElementById("xuexiziliao_add");
+    ban.style.display="none";
+}
+function show8gai(){
+    $("#xuexiziliao-gai").slideToggle("slow");
+}
+function hiden8gai(){
+    var ban=document.getElementById("xuexiziliao-gai");
+    ban.style.display="none";
+}
+$(document).on('click', '#xuexiziliao .btn-danger', function() {
+    var id=this.parentNode.getAttribute("class");
+    document.getElementById("xuexidel").setAttribute("value",id);
+    $(".xuexidelete").eq(0).slideToggle("slow");
+})
+function xuexihiden(){
+    $(".xuexidelete").eq(0).css("display","none");
+}
 
 
 
@@ -481,7 +511,7 @@ function shenpixiugaiMsg(last_id){
 }
 
 
-//安全性作业的修改
+//安全性作业的修改回显
 $(document).on('click', '#anquanxingzuoye .btn-primary', function() {
     var id=this.parentNode.getAttribute("class");
     document.getElementById("anquansss").setAttribute("value",id);
@@ -490,25 +520,21 @@ $(document).on('click', '#anquanxingzuoye .btn-primary', function() {
 })
 function anquanzuoyeMsg(last_id){
     $.ajax({
-        url:"?id="+last_id+"&biao=8",
+        url:"/shenmu_war_exploded/anquanzuoye/getAnquanzuoyeById/"+last_id,
         type:"get",
         success:function(data){
-            var put_minchen=document.getElementById("anquan-gai").getElementsByTagName("input")[4];
-            put_minchen.value=data[0];
-            var put_leibie=document.getElementById("anquan-gai").getElementsByTagName("select")[0];
-            var lvalue = data[1];
-            if(lvalue!=""){
-               for(var i=0;i<put_leibie.options.length;i++){
-                   if(value==put_leibie.options[i].value){
-                    put_leibie.options[i].selected = 'selected';
-                    break;
-                     }
-                  }
-            }
-            var put_miaoshu=document.getElementById("anquan-gai").getElementsByTagName("input")[4];
-            put_miaoshu.value=data[2];
-            
-            
+            var guanjian=document.getElementById("anquan-gai").getElementsByTagName("input")[4];
+            guanjian.value=data.guanjianxiangmu;
+            var put_minchen=document.getElementById("anquan-gai").getElementsByTagName("input")[5];
+            put_minchen.value=data.name;
+
+
+            var put_miaoshu=document.getElementById("anquan-gai").getElementsByTagName("textarea")[0];
+            put_miaoshu.value=data.jiandanmiaoshu;
+            // var put_leibie=document.getElementById("anquan-gai").getElementsByTagName("input")[6];
+            // put_leibie.value = data.wenjianleixing;
+            $("#anquan-gai input[name='anquanuplei']:checked").val(data.wenjianleixing);
+
         },
         error:function(data){
             console.log(data);
@@ -597,6 +623,42 @@ function helihuagaiMsg(last_id){
         }
     });
 }
+
+//学习资料修改回显
+$(document).on('click', '#xuexiziliao .btn-primary', function() {
+    var id=this.parentNode.getAttribute("class");
+    document.getElementById("xuexisssss").setAttribute("value",id);
+    xuexiziliaogaiMsg(id);
+    show8gai();
+})
+function xuexiziliaogaiMsg(last_id){
+    console.log(last_id);
+    var fenzu=document.getElementById("wangyefenzu").innerHTML;
+
+    $.ajax({
+        url:"/shenmu_war_exploded/xuexiziliao/getXuexiziliao/"+last_id,
+        type:"get",
+        success:function(data){
+            var inputs=document.getElementById("xuexiziliao-gai").getElementsByTagName('input');
+            inputs[9].value=data.faburen;
+            inputs[10].value=data.fabushijian;
+            var put_xuanze=document.getElementById("xuexiziliao-gai").getElementsByTagName("select")[0];
+            var value = data.leibie;
+            if(value!=""){
+                for(var i=0;i<put_xuanze.options.length;i++){
+                    if(value==put_xuanze.options[i].value){
+                        put_xuanze.options[i].selected = 'selected';
+                        break;
+                    }
+                }
+            }
+        },
+        error:function(data){
+            console.log(data);
+        }
+    });
+}
+
                   //ajax请求数据库的数据如下
 
 //个人信息的个人信息加载
@@ -1255,6 +1317,56 @@ function tpm6sgetMsg(){
 }
 
 
+//安全关键性作业信息加载
+// setInterval(shenpigetMsg,500);
+function anquantou(){
+    var htm='';
+    htm+=`<tr id="thead">
+    <td>序号</td>
+    <td>关键项目</td>
+    <td>名称</td>
+    <td>类别</td>
+    <td>描述</td>
+    <td>操作</td>
+    </tr>
+    <tr>`;
+    $('#anquanxingzuoye').html(htm);
+}
+function anquanaddMsg(i,guanjianxiangmu,mingcheng,leibie,miaoshu,ID){
+
+    var html='';
+    html+=`<tr>
+    <td>${i+1}</td>
+    <td>${guanjianxiangmu}</td>
+    <td>${mingcheng}</td>
+    <td>${leibie}</td>
+    <td>${miaoshu}</td>
+    <td><div class="${ID}">
+            <button type="button" class="btn btn-primary " >修改</button>
+            <button type="button" class="btn btn-danger">删除</button></div>
+    </td>
+    </tr>`;
+    $('#anquanxingzuoye').append(html);
+}
+function anquangetMsg(){
+    var fenzu=document.getElementById("wangyefenzu").innerHTML;
+    $.ajax({
+        url:"/shenmu_war_exploded/anquanzuoye/getAnquanzuoyeByFenzu/"+fenzu,
+        type:"get",
+        success:function(data){
+            console.log(data);
+            anquantou();
+            for(var i=0;i<data.length;i++){
+                anquanaddMsg(i,data[i].guanjianxiangmu,data[i].name,data[i].wenjianleixing,data[i].jiandanmiaoshu,data[i].id);
+            }
+        },
+        error:function(data){
+            console.log("111111111111111111111111111111111111");
+        }
+    });
+}
+
+
 //合理化建议信息加载
 
 function helihuatou(){
@@ -1304,6 +1416,55 @@ function helihuagetMsg(){
     });
 }
 
+//学习资料信息加载
+
+function xuexitou(){
+    var htm='';
+    htm+=`<tr id="thead">
+    <td>序号</td>
+    <td>文件名</td>
+    <td>所属分类</td>
+    <td>发布人</td>
+    <td>发布时间</td>
+    <td>操作</td>
+    </tr>`;
+    $('#xuexiziliao').html(htm);
+}
+function xuexiaddMsg(i,wenjianname,fenlei,IfaburenD,fabutime,ID){
+
+    var html='';
+    html+=`<tr>
+    <td>${i+1}</td>
+    <td>${wenjianname}</td>
+    <td>
+    ${fenlei}
+    </td>
+    <td>${IfaburenD}</td>
+    <td>${fabutime}</td>
+    <td><div class="${ID}">
+            <button type="button" class="btn btn-primary" >修改</button>
+            <button type="button" class="btn btn-danger">删除</button></div>
+    </td>
+    </tr>`;
+    $('#xuexiziliao').append(html);
+}
+function xuexigetMsg(){
+    var fenzu=document.getElementById("wangyefenzu").innerHTML;
+    $.ajax({
+        url:"/shenmu_war_exploded/xuexiziliao/getXuexziliaoByFenzu/"+fenzu,
+        type:"get",
+        success:function(data){
+            console.log(data);
+            xuexitou();
+            for(var i=0;i<data.length;i++){
+                xuexiaddMsg(i,data[i].wenjianmingcheng,data[i].leibie,data[i].faburen,data[i].fabushijian,data[i].id);
+            }
+        },
+        error:function(data){
+            console.log(data);
+        }
+    });
+}
 
 
 //获取get传值的方法
