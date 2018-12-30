@@ -12,7 +12,6 @@ public class Banzu implements Serializable {
     private String logoshiyi;
     private String banzujianjie;
     private String zuzhijigou;
-    private String yuangognfengcai;
     private Integer fenzu;
 
     public Integer getId() {
@@ -63,13 +62,6 @@ public class Banzu implements Serializable {
         this.zuzhijigou = zuzhijigou;
     }
 
-    public String getYuangognfengcai() {
-        return yuangognfengcai;
-    }
-
-    public void setYuangognfengcai(String yuangognfengcai) {
-        this.yuangognfengcai = yuangognfengcai;
-    }
 
     public Integer getFenzu() {
         return fenzu;
@@ -88,7 +80,7 @@ public class Banzu implements Serializable {
                 ", logoshiyi='" + logoshiyi + '\'' +
                 ", banzujianjie='" + banzujianjie + '\'' +
                 ", zuzhijigou='" + zuzhijigou + '\'' +
-                ", yuangognfengcai='" + yuangognfengcai + '\'' +
+
                 ", fenzu=" + fenzu +
                 '}';
     }

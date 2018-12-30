@@ -54,6 +54,60 @@
     </style>
 </head>
 <body>
+
+<script>
+
+
+    function login()
+    {
+
+        var yonghuming = window.localStorage.getItem("uname");
+        var mima = window.localStorage.getItem("upwd");
+
+        var data={
+            "yonghuming":yonghuming,
+            "mima":mima
+        }
+        data=JSON.stringify(data);
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                console.log(xmlhttp.responseText);
+
+
+
+
+                if (xmlhttp.responseText == "false") {
+                    alert("初始密码没有修改，请修改！");
+                    window.location.href = "./zhuce.html?yonghuming1="+yonghuming;
+                }
+                if(xmlhttp.responseText == "true"){
+                    alert("您没有登录，请先登录！");
+                    window.location.href = "./login.html";
+                }
+
+
+            }
+
+        }
+        xmlhttp.open("POST","/shenmu_war_exploded/login/login",true);
+        xmlhttp.setRequestHeader("Content-type","application/json; charset=utf-8");
+        xmlhttp.send(data);
+    }
+    login();
+</script>
 <div id="leftNave" style="height: 100%;">
     <h3>
         后台管理
@@ -1086,7 +1140,7 @@
     </textarea></p>
                     <p><label>组织机构: </label><input id="banzujigou" type="file" name="text5"><span style="color:red;font-size:10px;">上传文件大小不能超过5MB</span>
                     </p>
-                    <p><label>员工风采: </label><input id="fengcai" type="file" name="text6[]" multiple="multiple" value=""><span
+                    <p><label>员工风采: </label><input id="fengcai" type="file" name="text6[]" value=""accept="image/gif, image/jpeg,image/png,image/jpg"  multiple="multiple" ><span
                             style="color:red;font-size:10px;">上传文件大小不能超过10MB</span></p>
                     <input id="banzuwenhuafenzu" type="hidden" name="fenzu" value="">
                 </form>

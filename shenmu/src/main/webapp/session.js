@@ -1,28 +1,77 @@
 
-
+//退出登录
     var btn= document.getElementsByClassName("to")[0].getElementsByTagName("button")[0];
 
     btn.onclick=function (ev) {
-        alert(1);
         $.ajax({
             url: "/shenmu_war_exploded/renyuan/logout",
             type: "get",
             success: function (data) {
                 alert("安全退出成功！");
                 console.log("aaaa");
+                window.localStorage.setItem("uname","丁建峰");
+                window.localStorage.setItem("upwd",19);
                 window,location.href="../../login.html";
 
             },
             error: function (data) {
                 alert("安全退出成功！");
                 console.log("aaaa");
+                window.localStorage.setItem("uname","丁建峰");
+                window.localStorage.setItem("upwd",19);
                 window,location.href="../../login.html";
 
             }
 
         });
     };
+//验证进如网页的人
+function login()
+{
 
+    var yonghuming = window.localStorage.getItem("uname");
+    var mima = window.localStorage.getItem("upwd");
+
+    var data={
+        "yonghuming":yonghuming,
+        "mima":mima
+    }
+    data=JSON.stringify(data);
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {
+        //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {
+        // IE6, IE5 浏览器执行代码
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            console.log(xmlhttp.responseText);
+
+
+
+
+
+            if(xmlhttp.responseText == "true"){
+                alert("您没有登录，请先登录！");
+                window.location.href = "../../login.html";
+            }
+
+
+        }
+
+    }
+    xmlhttp.open("POST","/shenmu_war_exploded/login/login",true);
+    xmlhttp.setRequestHeader("Content-type","application/json; charset=utf-8");
+    xmlhttp.send(data);
+}
+login();
 
     //信息加载
     function add0(m){return m<10?'0'+m:m }
@@ -144,6 +193,10 @@
         htm+=`<div class="inform" style="display:none">
         <div  class="btn close">关闭</div>
         <p id="headtitle">${data[1]} ${data[0]}</p> 
+        //    <center><p>${data[1]} <a href="http://222.24.63.100:80/shenmu_war_exploded/${data[2]}" download>下载</a></p></center>
+        // <object type="text/html" data="http://222.24.63.100:80/shenmu_war_exploded/${data[3]}" width="100%" height="100%" style="height: 800px;width:70%;margin-left: 15%;"></object>
+        // </div>;
+
         
         <center><p>${data[1]} <a href="http://localhost:8080/shenmu_war_exploded/${data[2]}" download>下载</a></p></center>
         <object type="text/html" data="http://localhost:8080/shenmu_war_exploded/${data[3]}" width="100%" height="100%" style="height: 800px;width:70%;margin-left: 15%;"></object>

@@ -2,6 +2,7 @@ package com.acat.dao;
 
 import com.acat.model.Banzu;
 import com.acat.vo.BanZuVo;
+import com.acat.vo.LogoAndJigou;
 
 
 public interface IBanzuDao {
@@ -34,5 +35,6 @@ public interface IBanzuDao {
 
    Banzu getAllByFezu(Integer fenzu);
 
+    LogoAndJigou get(Integer fenzu);
 
 }

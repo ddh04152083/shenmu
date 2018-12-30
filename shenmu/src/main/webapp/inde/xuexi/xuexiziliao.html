@@ -209,6 +209,48 @@
 
         <!-- //分组加到链接后面 -->
         <script>
+            function login()
+            {
+
+                var yonghuming = window.localStorage.getItem("uname");
+                var mima = window.localStorage.getItem("upwd");
+
+                var data={
+                    "yonghuming":yonghuming,
+                    "mima":mima
+                }
+                data=JSON.stringify(data);
+                var xmlhttp;
+                if (window.XMLHttpRequest)
+                {
+                    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                    xmlhttp=new XMLHttpRequest();
+                }
+                else
+                {
+                    // IE6, IE5 浏览器执行代码
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange=function()
+                {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                    {
+                        console.log(xmlhttp.responseText);
+
+                        if(xmlhttp.responseText == "true"){
+                            alert("您没有登录，请先登录！");
+                            window.location.href = "../../login.html";
+                        }
+
+
+                    }
+
+                }
+                xmlhttp.open("POST","/shenmu_war_exploded/login/login",true);
+                xmlhttp.setRequestHeader("Content-type","application/json; charset=utf-8");
+                xmlhttp.send(data);
+            }
+            login();
             //获取get传值的方法
             function getQueryString(name) {
                 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

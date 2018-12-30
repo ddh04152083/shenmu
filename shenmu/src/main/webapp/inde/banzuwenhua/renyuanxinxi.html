@@ -263,10 +263,10 @@
 <!-- 对应其中的内容的部分 -->
 <div id="culterBox">
 <div class="culterIntroduction">
-<img src="./renyuanxinxi_files/id13.jpg" class="culterImg">
+<img src="./renyuanxinxi_files/id13.jpg" class="culterImg" id="logoimg">
 <div class="culterContent">
 <h3>人员信息</h3>
-<form action="http://222.24.63.119/p=1691" class="mesTab">
+<form action=" " class="mesTab">
 <table border="1px" cellspecing="0" class="mes" width="900px" id="peopleMes" class="table table-bordered table-hover">
 <thead>
 <tr><td>序号</td>
@@ -473,6 +473,13 @@
 </div>
 </div>
 </div>
+                <script>
+                    var logoimg=window.localStorage.getItem("logoimg");
+                    var zuzhiimg=window.localStorage.getItem("zuzhiimg");
+                    console.log(logoimg);
+                    document.getElementById("logoimg").setAttribute('src',logoimg);
+                    document.getElementById("zuzhiing").setAttribute('src',zuzhiimg);
+                </script>
                 <script>
                     //人员信息表信息加载
                     function renyuantou(){

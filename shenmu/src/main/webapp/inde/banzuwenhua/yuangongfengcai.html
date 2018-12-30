@@ -263,7 +263,7 @@
 <!-- 对应其中的内容的部分 -->
 <div id="culterBox">
 <div class="culterIntroduction">
-<img src="./yuangongfengcai_files/id13.jpg" class="culterImg">
+<img src="./yuangongfengcai_files/id13.jpg" class="culterImg" id="logoimg">
 <div class="culterContent">
 <p class="two">员工风采</p>
 
@@ -272,134 +272,61 @@
 <p>安全检查</p>
 </div>
 
-<div class="one">
-<a href="./yuangongfengcai_files/安全签名.JPG"><img src="./yuangongfengcai_files/安全签名.JPG" alt="" width="200px"></a>
-<p>安全签名</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/班组点名.JPG"><img src="./yuangongfengcai_files/班组点名.JPG" alt="" width="200px"></a>
-<p>班组点名</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/班组合影1.JPG"><img src="./yuangongfengcai_files/班组合影1.JPG" alt="" width="200px"></a>
-<p>班组合影1</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/班组合影2.JPG"><img src="./yuangongfengcai_files/班组合影2.JPG" alt="" width="200px"></a>
-<p>班组合影2</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/备品三.JPG"><img src="./yuangongfengcai_files/备品三.JPG" alt="" width="200px"></a>
-<p>备品三</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/党员示范岗.JPG"><img src="./yuangongfengcai_files/党员示范岗.JPG" alt="" width="200px"></a>
-<p>党员示范岗</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/冯雅兰.JPG"><img src="./yuangongfengcai_files/冯雅兰.JPG" alt="" width="200px"></a>
-<p>冯雅兰</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/活动1.JPG"><img src="./yuangongfengcai_files/活动1.JPG" alt="" width="200px"></a>
-<p>活动1</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/活动2.JPG"><img src="./yuangongfengcai_files/活动2.JPG" alt="" width="200px"></a>
-<p>活动2</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/活动照片.JPG"><img src="./yuangongfengcai_files/活动照片.JPG" alt="" width="200px"></a>
-<p>活动照片</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/技术比武.JPG"><img src="./yuangongfengcai_files/技术比武.JPG" alt="" width="200px"></a>
-<p>技术比武</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/接力比赛活动.JPG"><img src="./yuangongfengcai_files/接力比赛活动.JPG" alt="" width="200px"></a>
-<p>接力比赛活动</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/李莎.JPG"><img src="./yuangongfengcai_files/李莎.JPG" alt="" width="200px"></a>
-<p>李莎</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/领导参观1.JPG"><img src="./yuangongfengcai_files/领导参观1.JPG" alt="" width="200px"></a>
-<p>领导参观1</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/领导参观2.JPG"><img src="./yuangongfengcai_files/领导参观2.JPG" alt="" width="200px"></a>
-<p>领导参观2</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/女工.JPG"><img src="./yuangongfengcai_files/女工.JPG" alt="" width="200px"></a>
-<p>女工</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/女工2.JPG"><img src="./yuangongfengcai_files/女工2.JPG" alt="" width="200px"></a>
-<p>女工2</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/女工3.JPG"><img src="./yuangongfengcai_files/女工3.JPG" alt="" width="200px"></a>
-<p>女工3</p>
-</div>
-
-<div class="one">
-<a href="./yuangongfengcai_files/胥婷婷.JPG"><img src="./yuangongfengcai_files/胥婷婷.JPG" alt="" width="200px"></a>
-<p>胥婷婷</p>
-</div>
 
 </div>
 </div>
 </div>
+
+
+        <script>
+                var logoimg=window.localStorage.getItem("logoimg");
+                console.log(logoimg);
+                document.getElementById("logoimg").setAttribute('src',logoimg);
+                function  putimgs(data) {
+                    var htm=`<p class="two">员工风采</p>`;
+                    for(var i=0;i<data.length;i++){
+                        var mincheng=data[i].banzujianjie.split('/');
+                        var a=mincheng[1];
+                        console.log(a);
+                        var arr=a.split('.');
+                        var src=arr[0];
+                        console.log(src);
+
+                        // htm+=`<div class="one">
+                        //         <a href="http://222.24.63.100:80/shenmu_war_exploded/${data[i].banzujianjie}"><img src="http://222.24.63.100:80/shenmu_war_exploded/${data[i].banzujianjie}" alt="" width="200px" height="167px"></a>
+                        //         <p>${src}</p>
+                        //         </div>`;
+                        htm+=`<div class="one">
+                                <a href="http://localhost:8080/shenmu_war_exploded/${data[i].banzujianjie}"><img src="http://localhost:8080/shenmu_war_exploded/${data[i].banzujianjie}" alt="" width="200px" height="167px"></a>
+                                <p>${src}</p>
+                                </div>`;
+                    }
+                    $('.culterContent').eq(0).html(htm);
+                }
+                function fengcaiGet() {
+
+                    var fen=getQueryString("fenzu");
+                    console.log(fen);
+                    $.ajax({
+                        url:'/shenmu_war_exploded/banzu/getfengcai/'+fen,
+                        type:'get',
+                        success:function(data){
+                            console.log(data);
+                            putimgs(data);
+
+                        },
+                        error:function(data){
+                            console.log(data);
+                        }
+                    });
+                }
+                fengcaiGet();
+        </script>
 
 <footer>
 <p>@国家能源集团有限公司</p>
 </footer>
-<script type="text/javaScript">
-window.onload = function () {
-var odiv2 = document.getElementById('div2');
-var ali = odiv2.getElementsByTagName('li');
-var aspeed = -5;
-var timer = null;
-odiv2.innerHTML += odiv2.innerHTML;
-odiv2.style.width = ali[0].offsetWidth * ali.length + 'px';
-odiv2.onmouseover = function () { clearInterval(timer); };
-function a() {
-timer = setInterval(function () {
-odiv2.style.left = odiv2.offsetLeft + aspeed + 'px';
-if (odiv2.offsetLeft < -odiv2.offsetWidth / 2) {
-odiv2.style.left = '0px';
-}
-}, 100);
-};
-odiv2.onmouseout = a;
-a();
-var oSear = document.getElementById('sear');
-function b() {
-oSear.innerHTML = '查询';
-}
-b();
-}
-</script>
+
 
 
 </body></html>

@@ -4,6 +4,7 @@ import com.acat.dao.IBanzuDao;
 import com.acat.model.Banzu;
 import com.acat.service.IBanzuService;
 import com.acat.vo.BanZuVo;
+import com.acat.vo.LogoAndJigou;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +39,10 @@ public class IBanzuServiceImpl implements IBanzuService {
 
     public Banzu getBanzuByFenzu(Integer fenzu){
         return iBanzuDao.getBanzuByFenzu(fenzu);
+    }
+
+    @Override
+    public LogoAndJigou get(Integer fenzu) {
+        return iBanzuDao.get(fenzu);
     }
 }

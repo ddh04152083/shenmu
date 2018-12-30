@@ -70,8 +70,10 @@
                 result=result.split(",");
                 console.log(result);
                 if(Number(result[0])==1){
-
+                    window.localStorage.setItem("uname",yonghuming);
+                    window.localStorage.setItem("upwd",mima);
                         alert("登陆成功!");
+
                         window.location.href = "./back.html?id="+Number(result[1]);
 
                 }
@@ -79,6 +81,8 @@
                 else if(Number(result[0])==0){
 
                     alert("登陆成功!");
+                    window.localStorage.setItem("uname",yonghuming);
+                    window.localStorage.setItem("upwd",mima);
                     window.location.href = "./inde/banzuwenhua/banzujianjie.html?fenzu="+Number(result[2])+"&shenfen=0"+"&name="+yonghuming;
 
                 }

@@ -195,8 +195,8 @@ body{
   }
   #leftNave p{
     margin:0 5px 0 10px;
-    float:left;
-    width:50%;
+
+    width:80%;
     height:43px;
     line-height:43px;
     text-align:center;
@@ -211,7 +211,7 @@ body{
      width:10px;
      height:20px;
      line-height:20px;
-     text-align:20px;
+
   }
 
   a{

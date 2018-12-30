@@ -262,41 +262,22 @@
 <!-- 对应其中的内容的部分 -->
 <div id="culterBox">
 <div class="culterIntroduction">
-<img src="./banzujigou_files/id13.jpg" class="culterImg">
+<img src="./banzujigou_files/id13.jpg" class="culterImg" id="logoimg">
 <h3>组织机构</h3>
-<img src="./banzujigou_files/table13.png" alt="" width="650px" class="orginImg" style="margin: -50px 0 0 200px;">
+<img src="./banzujigou_files/table13.png" alt="" width="650px" class="orginImg" style="margin: -50px 0 0 200px;" id="zuzhiing">
 </div>
 </div>
-
+        <script>
+            var logoimg=window.localStorage.getItem("logoimg");
+            var zuzhiimg=window.localStorage.getItem("zuzhiimg");
+            console.log(logoimg);
+            document.getElementById("logoimg").setAttribute('src',logoimg);
+            document.getElementById("zuzhiing").setAttribute('src',zuzhiimg);
+        </script>
 <footer>
 <p>@国家能源集团有限公司</p>
 </footer>
-<script type="text/javaScript">
-window.onload = function () {
-var odiv2 = document.getElementById('div2');
-var ali = odiv2.getElementsByTagName('li');
-var aspeed = -5;
-var timer = null;
-odiv2.innerHTML += odiv2.innerHTML;
-odiv2.style.width = ali[0].offsetWidth * ali.length + 'px';
-odiv2.onmouseover = function () { clearInterval(timer); };
-function a() {
-timer = setInterval(function () {
-odiv2.style.left = odiv2.offsetLeft + aspeed + 'px';
-if (odiv2.offsetLeft < -odiv2.offsetWidth / 2) {
-odiv2.style.left = '0px';
-}
-}, 100);
-};
-odiv2.onmouseout = a;
-a();
-var oSear = document.getElementById('sear');
-function b() {
-oSear.innerHTML = '查询';
-}
-b();
-}
-</script>
+
 
 
 </body></html>

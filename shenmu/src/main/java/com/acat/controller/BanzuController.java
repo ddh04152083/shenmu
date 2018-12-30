@@ -1,10 +1,14 @@
 package com.acat.controller;
 
 import com.acat.model.Banzu;
+import com.acat.model.Yuangongfengcai;
 import com.acat.service.IBanzuService;
 
+import com.acat.service.YuangongfengcaiService;
 import com.acat.vo.BanZuVo;
 
+import com.acat.vo.LogoAndJigou;
+import com.acat.vo.YuangongfengcaiVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -22,8 +28,9 @@ public class BanzuController {
     @Autowired
     private IBanzuService iBanzuService;
     private Banzu banzu = new Banzu();
-
-    @PostMapping("/addBanzu")
+    @Autowired
+     private YuangongfengcaiService yuangongfengcaiService;
+      @PostMapping("/addBanzu")
     public void addBanzu(@RequestBody BanZuVo banZuVo) {
         System.out.println(banZuVo);
         banzu.setBiaoti(banZuVo.getBiaoti());
@@ -41,36 +48,44 @@ public class BanzuController {
     @PostMapping("/add")
     public void add(MultipartFile[] file, HttpSession session) {
 //        int count = 1;
-//        System.out.println("file length===="+file.length);
+        System.out.println("file length===="+file.length);
 
         int delete = iBanzuService.delete(banzu.getFenzu());
+         yuangongfengcaiService.delete(banzu.getFenzu());
         System.out.println(delete);
         String path = session.getServletContext().getRealPath("/picture");
         System.out.println("path======" + path);
-        String[] filename = new String[3];
-        for (int i = 0; i < 3; i++) {
-            filename[i] = UUID.randomUUID() + file[i].getOriginalFilename();
+        String[] filename = new String[file.length];
+        for (int i = 0; i < filename.length; i++) {
+            filename[i] = file[i].getOriginalFilename();
         }
         System.out.println("filename==========" + filename);
 
-        File targetFile0 = new File(path, filename[0]);
-        if (!targetFile0.exists()) {
-            targetFile0.mkdirs();
+        File[] files=new File[filename.length];
+        for (int i=0;i<files.length;i++){
+              files[i]=new File(path,filename[i]);
+            if (!files[i].exists()){
+                files[i].mkdirs();
+            }
         }
-        File targetFile1 = new File(path, filename[1]);
-        if (!targetFile1.exists()) {
-            targetFile1.mkdirs();
-        }
-        File targetFile2 = new File(path, filename[2]);
-        if (!targetFile2.exists()) {
-            targetFile2.mkdirs();
-        }
+//        File targetFile0 = new File(path, filename[0]);
+//        if (!targetFile0.exists()) {
+//            targetFile0.mkdirs();
+//        }
+//        File targetFile1 = new File(path, filename[1]);
+//        if (!targetFile1.exists()) {
+//            targetFile1.mkdirs();
+//        }
+//        File targetFile2 = new File(path, filename[2]);
+//        if (!targetFile2.exists()) {
+//            targetFile2.mkdirs();
+//        }
 
 
         try {
-            file[0].transferTo(targetFile0);
-            file[1].transferTo(targetFile1);
-            file[2].transferTo(targetFile2);
+            for (int i=0;i<file.length;i++) {
+                file[i].transferTo(files[i]);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,11 +93,17 @@ public class BanzuController {
         System.out.println("" + "/" + filename[0]);
         banzu.setBanzulogo("picture" + "/" + filename[0]);
         banzu.setZuzhijigou("picture" + "/" + filename[1]);
-        banzu.setYuangognfengcai("picture" + "/" + filename[2]);
+        iBanzuService.addBanzu(banzu);
+      for (int i=2;i<filename.length;i++){
+          Yuangongfengcai yuangongfengcai=new Yuangongfengcai();
+          yuangongfengcai.setBanzujianjie("picture" + "/" +filename[i]);
+          yuangongfengcai.setFenzu(banzu.getFenzu());
+          yuangongfengcaiService.add(yuangongfengcai);
+      }
 
         System.out.println(banzu);
 
-        iBanzuService.addBanzu(banzu);
+
 //        try{
 //            DiskFileItemFactory factory = new DiskFileItemFactory();
 //            ServletFileUpload upload = new ServletFileUpload(factory);
@@ -130,4 +151,17 @@ public class BanzuController {
     public Banzu getAllByBanzu(@PathVariable("fenzu") Integer fenzu) {
         return iBanzuService.getAllByFezu(fenzu);
     }
+
+    @GetMapping("/getfengcai/{fenzu}")
+    public List<Yuangongfengcai> list(@PathVariable("fenzu") Integer fenzu){
+     return yuangongfengcaiService.getAll(fenzu);
+    }
+
+    @GetMapping("/getlogo/{fenzu}")
+    public LogoAndJigou logo(@PathVariable("fenzu") Integer fenzu){
+        return iBanzuService.get(fenzu);
+    }
+
+
+
 }
